@@ -45,9 +45,9 @@ const Auth = () => {
 		setIsLoginMode((prevMode) => !prevMode);
 	};
 
-	const authSubmitHandler = (event) => {
+	const authSubmitHandler = async (event) => {
 		event.preventDefault();
-		console.log(formState.inputs);
+		fetch(`/api/users/signup`);
 		auth.login();
 	};
 
