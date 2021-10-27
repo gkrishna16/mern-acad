@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
@@ -40,18 +39,19 @@ const NewPlace = () => {
 	const placeSubmitHandler = async (event) => {
 		event.preventDefault();
 		try {
-			const response = await sendRequest(
-				`http://localhost:5000/api/places`,
-				`POST`,
+			await sendRequest(
+				'http://localhost:5000/api/places',
+				'POST',
 				JSON.stringify({
 					title: formState.inputs.title.value,
 					description: formState.inputs.description.value,
 					address: formState.inputs.address.value,
-					creator: formState.inputs.creator.value,
+					creator: auth.userId,
 				}),
-				{ 'Content-Type': 'Application-Json' },
+				{ 'Content-Type': 'application/json' },
 			);
-		} catch (error) {}
+			history.push('/');
+		} catch (err) {}
 	};
 
 	return (
